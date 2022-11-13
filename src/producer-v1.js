@@ -9,7 +9,7 @@ const sqs = new AWS.SQS({
 
 // 1 message => 5 seconds
 // 100 messages => 2 minutes and 04 seconds
-const process = async () => {
+const processMessage = async () => {
     console.log("Starting....")
     console.time()
     for (let index = 0; index < 100000; index += 1) {
@@ -23,4 +23,4 @@ const process = async () => {
     console.log("Finish....")
 }
 
-process()
+processMessage()

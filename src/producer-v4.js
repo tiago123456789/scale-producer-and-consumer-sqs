@@ -25,7 +25,7 @@ const sqs = new AWS.SQS({
 // Using sendBatchMessage + task parallel + reuse http connection to 100 messages => 7 seconds
 
 
-const process = async () => {
+const processMessage = async () => {
     console.log("Starting....")
     console.time()
     let messages = []
@@ -64,4 +64,4 @@ const process = async () => {
     console.log("Finish....")
 }
 
-process()
+processMessage()

@@ -13,7 +13,7 @@ const sqs = new AWS.SQS({
 // 100 messages => 2 minutes and 04 seconds
 // Using sendBatchMessage to 100 messages => 33 seconds 
 
-const process = async () => {
+const processMessage = async () => {
     console.log("Starting....")
     console.time()
 
@@ -40,4 +40,4 @@ const process = async () => {
     console.log("Finish....")
 }
 
-process()
+processMessage()

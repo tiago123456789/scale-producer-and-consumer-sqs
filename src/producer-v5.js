@@ -25,8 +25,6 @@ if (cluster.isMaster) {
     const http = require('https');
     const agent = new http.Agent({
         keepAlive: true,
-        // Infinity is read as 50 sockets
-        // maxSockets: Infinity
     });
 
 

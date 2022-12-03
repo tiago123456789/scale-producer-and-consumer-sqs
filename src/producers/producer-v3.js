@@ -1,18 +1,8 @@
-require("dotenv").config()
+require("dotenv").config({ path: "../../.env" })
 const AWS = require("aws-sdk")
 const uuid = require("uuid")
-const http = require('https');
-const agent = new http.Agent({
-    keepAlive: true,
-});
-
 
 var credentials = new AWS.SharedIniFileCredentials({ profile: 'default' });
-AWS.config.update({
-    httpOptions: {
-        agent
-    }
-});
 AWS.config.credentials = credentials;
 const sqs = new AWS.SQS({
     region: 'us-east-1'
@@ -22,8 +12,6 @@ const sqs = new AWS.SQS({
 // 100 messages => 2 minutes and 04 seconds
 // Using sendBatchMessage to 100 messages => 33 seconds 
 // Using sendBatchMessage + task parallel to 100 messages => 17 seconds
-// Using sendBatchMessage + task parallel + reuse http connection to 100 messages => 7 seconds
-
 
 const processMessage = async () => {
     console.log("Starting....")

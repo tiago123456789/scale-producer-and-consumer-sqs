@@ -12,6 +12,7 @@
   "dependencies": {
     "aws-sdk": "^2.1253.0",
     "dotenv": "^16.0.3",
+    "sqs-consumer": "^5.7.0",
     "uuid": "^9.0.0"
   }
 }

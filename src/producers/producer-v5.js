@@ -1,6 +1,6 @@
-require("dotenv").config()
+require("dotenv").config({ path: "../../.env" })
 const cluster = require("cluster")
-const fakeData = require("../fake.json")
+const fakeData = require("../../fake.json")
 const cpus = 8
 
 
@@ -20,6 +20,8 @@ if (cluster.isMaster) {
         cluster.workers[lastPosition].send({ index, limit: totalItemsForeachProcess })
     }
 } else {
+    require("dotenv").config({ path: "./.env" })
+
     const AWS = require("aws-sdk")
     const uuid = require("uuid")
     const http = require('https');

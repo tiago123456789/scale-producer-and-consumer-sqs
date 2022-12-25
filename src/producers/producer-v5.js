@@ -1,7 +1,7 @@
 require("dotenv").config({ path: ".env" })
 const cluster = require("cluster")
 const fakeData = require("../../fake.json")
-const cpus = 8
+const cpus = 4
 
 
 // 1 message => 5 seconds

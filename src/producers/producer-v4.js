@@ -29,7 +29,7 @@ const processMessage = async () => {
     console.time()
     let messages = []
     let promisesSendMessage = []
-    for (let index = 0; index < 100000; index += 1) {
+    for (let index = 0; index < 200000; index += 1) {
         messages.push({
             Id: uuid.v4(),
             MessageBody: JSON.stringify({

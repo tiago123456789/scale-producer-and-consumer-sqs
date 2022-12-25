@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "./.env" })
+require("dotenv").config({ path: ".env" })
 const AWS = require("aws-sdk")
 const uuid = require("uuid")
 const http = require('https');

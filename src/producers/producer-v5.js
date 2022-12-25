@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../../.env" })
+require("dotenv").config({ path: ".env" })
 const cluster = require("cluster")
 const fakeData = require("../../fake.json")
 const cpus = 8

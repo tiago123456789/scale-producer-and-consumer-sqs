@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../../.env" })
+require("dotenv").config({ path: ".env" })
 
 const { Consumer } = require('sqs-consumer');
 const AWS = require("aws-sdk")

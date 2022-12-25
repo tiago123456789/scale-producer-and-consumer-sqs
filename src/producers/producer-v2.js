@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../../.env" })
+require("dotenv").config({ path: ".env" })
 
 const AWS = require("aws-sdk")
 const uuid = require("uuid")
@@ -18,13 +18,11 @@ const processMessage = async () => {
     console.time()
 
     let messages = []
-    for (let index = 0; index < 100000; index += 1) {
+    for (let index = 0; index < 1000; index += 1) {
         
         messages.push({
             Id: uuid.v4(),
-            MessageBody: JSON.stringify({
-                teste: "teste"
-            })
+            MessageBody: JSON.stringify({ "to": "teste2@gmail.com", "message": "teste2" })
         })
 
         if (messages.length === 10) {

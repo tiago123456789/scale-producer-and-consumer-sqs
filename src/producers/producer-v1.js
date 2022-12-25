@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../../.env" })
+require("dotenv").config({ path: ".env" })
 
 const AWS = require("aws-sdk")
 var credentials = new AWS.SharedIniFileCredentials({ profile: 'default' });
@@ -12,11 +12,11 @@ const sqs = new AWS.SQS({
 const processMessage = async () => {
     console.log("Starting....")
     console.time()
-    for (let index = 0; index < 100000; index += 1) {
+    for (let index = 0; index < 1; index += 1) {
         console.log(">>>>> Publishing 1 message")
         await sqs.sendMessage({
             QueueUrl: process.env.QUEUE,
-            MessageBody: JSON.stringify({ teste: "teste" })
+            MessageBody: JSON.stringify({ "to": "teste2@gmail.com", "message": "teste2" })
         }).promise()
     }
     console.timeEnd()

@@ -3,7 +3,8 @@ const fs = require("fs")
 const messages = []
 for (let index = 0; index < 100000; index++) {
     messages.push({
-        teste: `teste${index}`
+        to: `teste${index}@gmail.com`,
+        message: `teste${index}`
     })
 }
 

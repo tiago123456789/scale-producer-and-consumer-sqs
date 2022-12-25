@@ -32,9 +32,7 @@ const processMessage = async () => {
     for (let index = 0; index < 200000; index += 1) {
         messages.push({
             Id: uuid.v4(),
-            MessageBody: JSON.stringify({
-                teste: "teste"
-            })
+            MessageBody: JSON.stringify({ "to": "teste2@gmail.com", "message": "teste2" })
         })
 
         if (messages.length === 10) {

@@ -6,7 +6,6 @@ const agent = new http.Agent({
     keepAlive: true,
 });
 
-
 var credentials = new AWS.SharedIniFileCredentials({ profile: 'default' });
 AWS.config.update({
     httpOptions: {
@@ -27,6 +26,7 @@ const sqs = new AWS.SQS({
 
 const processMessage = async () => {
     console.log("Starting....")
+    console.time()
     let messages = []
     let promisesSendMessage = []
     for (let index = 0; index < 100000; index += 1) {

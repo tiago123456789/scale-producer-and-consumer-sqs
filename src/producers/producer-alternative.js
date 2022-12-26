@@ -64,11 +64,11 @@ const processMessage = async () => {
         }
     }
 
-    // if (promisesSendMessage.length > 0) {
-    //     console.log(`>>>> Publishing ${10 * promisesSendMessage.length} messages to sqs`)
-    //     await Promise.all(promisesSendMessage)
-    //     promisesSendMessage = []
-    // }
+    if (promisesSendMessage.length > 0) {
+        console.log(`>>>> Publishing ${10 * promisesSendMessage.length} messages to sqs`)
+        await Promise.all(promisesSendMessage)
+        promisesSendMessage = []
+    }
     console.timeEnd()
     console.log("Finish....")
 }

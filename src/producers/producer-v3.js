@@ -18,7 +18,7 @@ const processMessage = async () => {
     console.time()
     let messages = []
     let promisesSendMessage = []
-    for (let index = 0; index < 10000; index += 1) {
+    for (let index = 0; index < 1000; index += 1) {
         messages.push({
             Id: uuid.v4(),
             MessageBody: JSON.stringify({ "to": "teste2@gmail.com", "message": "teste2" })

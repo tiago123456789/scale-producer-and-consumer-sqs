@@ -47,7 +47,7 @@ const app = Consumer.create({
         // await sleep(1)
         const data = JSON.parse(message.Body)
         console.log(data);
-        await sendEmail({ "to": "tiagorosadacost+1@gmail.com", "message": "teste teste" })
+        // await sendEmail({ "to": "tiagorosadacost+1@gmail.com", "message": "teste teste" })
         console.log(">>>>>>>> Finish")
         console.timeEnd()
     }

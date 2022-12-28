@@ -44,7 +44,7 @@ const app = Consumer.create({
     handleMessage: async (message) => {
         console.time()
         console.log(">>>>>>>> Processing...")
-        // await sleep(1)
+        await sleep(0.250)
         const data = JSON.parse(message.Body)
         console.log(data);
         // await sendEmail({ "to": "tiagorosadacost+1@gmail.com", "message": "teste teste" })

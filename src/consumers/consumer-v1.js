@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../../.env" })
+require("dotenv").config({ path: ".env" })
 
 const { Consumer } = require('sqs-consumer');
 const AWS = require("aws-sdk")
@@ -42,11 +42,14 @@ const sleep = (seconds) => {
 const app = Consumer.create({
     queueUrl: process.env.QUEUE,
     handleMessage: async (message) => {
+        console.time()
         console.log(">>>>>>>> Processing...")
-        await sleep(1)
+        // await sleep(1)
         const data = JSON.parse(message.Body)
         console.log(data);
+        await sendEmail({ "to": "tiagorosadacost+1@gmail.com", "message": "teste teste" })
         console.log(">>>>>>>> Finish")
+        console.timeEnd()
     }
 });
 

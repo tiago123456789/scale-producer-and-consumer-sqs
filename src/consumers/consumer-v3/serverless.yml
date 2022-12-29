@@ -3,10 +3,18 @@ service: consumer-v3-sqs
 provider:
   name: aws
   runtime: nodejs12.x
+  region: "us-east-1"
   lambdaHashingVersion: 20201221
 
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ses:SendEmail
+      Resource: 
+        - "arn:aws:ses:${self:provider.region}:*:*"
+
 functions:
-  extractJobsRepoBackendbr:
+  notify:
     handler: handler.main
     events:
       - sqs:

@@ -71,10 +71,10 @@
         }
       }
     },
-    "ExtractJobsRepoBackendbrLogGroup": {
+    "NotifyLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/consumer-v3-sqs-dev-extractJobsRepoBackendbr"
+        "LogGroupName": "/aws/lambda/consumer-v3-sqs-dev-notify"
       }
     },
     "IamRoleLambdaExecution": {
@@ -137,6 +137,13 @@
                 {
                   "Effect": "Allow",
                   "Action": [
+                    "ses:SendEmail"
+                  ],
+                  "Resource": "arn:aws:ses:us-east-1:*:*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
                     "sqs:ReceiveMessage",
                     "sqs:DeleteMessage",
                     "sqs:GetQueueAttributes"
@@ -165,18 +172,18 @@
         }
       }
     },
-    "ExtractJobsRepoBackendbrLambdaFunction": {
+    "NotifyLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/consumer-v3-sqs/dev/1670081681206-2022-12-03T15:34:41.206Z/consumer-v3-sqs.zip"
+          "S3Key": "serverless/consumer-v3-sqs/dev/1672355128504-2022-12-29T23:05:28.504Z/consumer-v3-sqs.zip"
         },
         "Handler": "handler.main",
         "Runtime": "nodejs12.x",
-        "FunctionName": "consumer-v3-sqs-dev-extractJobsRepoBackendbr",
+        "FunctionName": "consumer-v3-sqs-dev-notify",
         "MemorySize": 1024,
         "Timeout": 6,
         "Role": {
@@ -187,20 +194,20 @@
         }
       },
       "DependsOn": [
-        "ExtractJobsRepoBackendbrLogGroup"
+        "NotifyLogGroup"
       ]
     },
-    "ExtractJobsRepoBackendbrLambdaVersionYiU38zTj9iKeX6ZlSDojfnv0D6PGld35WmVN2SozU": {
+    "NotifyLambdaVersiont5pILNXYzBJqTAJfXsXyb4Xu8dAUcSAyfAxMKf4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "ExtractJobsRepoBackendbrLambdaFunction"
+          "Ref": "NotifyLambdaFunction"
         },
-        "CodeSha256": "t4vpCJqLoBBqCDSeq67a0HSedmWRB0jmeI+UbNOeHDQ="
+        "CodeSha256": "WlGtUrjag/fvcu60iPLb/MN8boLqPhStNYSsVrZMzw0="
       }
     },
-    "ExtractJobsRepoBackendbrEventSourceMappingSQSScaleproducer": {
+    "NotifyEventSourceMappingSQSScaleproducer": {
       "Type": "AWS::Lambda::EventSourceMapping",
       "DependsOn": [
         "IamRoleLambdaExecution"
@@ -210,7 +217,7 @@
         "EventSourceArn": "arn:aws:sqs:us-east-1:507403822990:scale-producer",
         "FunctionName": {
           "Fn::GetAtt": [
-            "ExtractJobsRepoBackendbrLambdaFunction",
+            "NotifyLambdaFunction",
             "Arn"
           ]
         },
@@ -227,13 +234,13 @@
         "Name": "sls-consumer-v3-sqs-dev-ServerlessDeploymentBucketName"
       }
     },
-    "ExtractJobsRepoBackendbrLambdaFunctionQualifiedArn": {
+    "NotifyLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ExtractJobsRepoBackendbrLambdaVersionYiU38zTj9iKeX6ZlSDojfnv0D6PGld35WmVN2SozU"
+        "Ref": "NotifyLambdaVersiont5pILNXYzBJqTAJfXsXyb4Xu8dAUcSAyfAxMKf4"
       },
       "Export": {
-        "Name": "sls-consumer-v3-sqs-dev-ExtractJobsRepoBackendbrLambdaFunctionQualifiedArn"
+        "Name": "sls-consumer-v3-sqs-dev-NotifyLambdaFunctionQualifiedArn"
       }
     }
   }

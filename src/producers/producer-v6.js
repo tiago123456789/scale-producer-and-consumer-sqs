@@ -1,6 +1,5 @@
 require("dotenv").config({ path: ".env" });
 const AWS = require("aws-sdk");
-const uuid = require("uuid");
 const http = require("https");
 const agent = new http.Agent({
   keepAlive: true,
@@ -17,11 +16,11 @@ const sqs = new AWS.SQS({
   region: "us-east-1",
 });
 
-// 1 message => 5 seconds
-// 100 messages => 2 minutes and 04 seconds
-// Using sendBatchMessage to 100 messages => 33 seconds
-// Using sendBatchMessage + task parallel to 100 messages => 17 seconds
-// Using sendBatchMessage + task parallel + reuse http connection to 100 messages => 7 seconds
+// Strategies applied:
+// Reuse http connection
+// Task parallel in node.js
+// Add 200 items inside one message
+// Put EC2 machine and SQS on same region to reduce latency
 
 const processMessage = async () => {
   console.log("Starting....");
@@ -51,24 +50,6 @@ const processMessage = async () => {
       await Promise.all(promisesSendMessage);
       promisesSendMessage = [];
     }
-
-    // if (messages.length === 10) {
-    //   promisesSendMessage.push(
-    //     sqs
-    //       .sendMessageBatch({
-    //         QueueUrl: process.env.QUEUE,
-    //         Entries: messages,
-    //       })
-    //       .promise()
-    //   );
-    //   messages = [];
-    // }
-
-    // if (promisesSendMessage.length == 4) {
-    //   console.log(">>>> Publishing 40 messages to sqs");
-    //   await Promise.all(promisesSendMessage);
-    //   promisesSendMessage = [];
-    // }
   }
 
   if (messages.length > 0) {
@@ -87,14 +68,6 @@ const processMessage = async () => {
     await Promise.all(promisesSendMessage);
     promisesSendMessage = [];
   }
-
-  //   if (promisesSendMessage.length > 0) {
-  //     console.log(
-  //       `>>>> Publishing ${10 * promisesSendMessage.length} messages to sqs`
-  //     );
-  //     await Promise.all(promisesSendMessage);
-  //     promisesSendMessage = [];
-  //   }
   console.timeEnd();
   console.log("Finish....");
 };
